@@ -35,10 +35,10 @@ const isImmutabilityEnabled = isImmutabilityEnabledRequest.data.state == "locked
 
 console.log(`Immutability is ${isImmutabilityEnabled ? "enabled" : "disabled"} for this session.`);
 
-const menuOpts = choiceMenu("Select an option:", "Reload USB ports", isImmutabilityEnabled ? "Disable Immutability" : "Enable Immutability");
+const menuOpts = choiceMenu("Select an option:", "Reload USB ports", "Toggle Immutability");
 
 switch (menuOpts) {
-  case 1: {
+  case "Reload USB ports": {
     const reloadUSBRequest = await axiod.post(`http://${endpointIP}:8000/api/v1/usb/refresh`);
     if (!reloadUSBRequest.data.success) console.warn("WARNING: Request failed!");
     else console.log("USB devices reloaded.");
@@ -46,7 +46,7 @@ switch (menuOpts) {
     break;
   }
 
-  case 2: {
+  case "Toggle Immutability": {
     const toggleImmutabilityRequest = await axiod.post(`http://${endpointIP}:8000/api/v1/immutability/set`, {
       state: isImmutabilityEnabled ? "unlock" : "lock"
     });

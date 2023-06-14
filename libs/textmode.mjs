@@ -13,5 +13,5 @@ export function choiceMenu(title, ...choices) {
   if (optionParsed != optionParsed) throw new Error("Invalid option");
   if (optionParsed <= 0 || optionParsed > choices.length) throw new Error("Invalid option");
 
-  return optionParsed;
+  return choices[optionParsed-1];
 }
